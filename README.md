@@ -47,7 +47,7 @@ HopScotch is a cartoonish, fun-themed **MERN stack taxi booking app** built for 
 ```bash
 # Clone repo
 git clone https://github.com/ParthChaturvedi07/Hop-Scotch.git
-cd hopscotch
+cd HopScotch
 
 # Backend setup
 cd backend
