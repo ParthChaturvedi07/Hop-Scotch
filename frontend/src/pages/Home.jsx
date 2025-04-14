@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import axios from "axios";
 import Logo from "../assets/images/031bd833-fab5-4988-93d4-a2165eddbc92-removebg-preview.png";
 import streetMap from "../assets/images/0_gwMx05pqII5hbfmX.gif";
 import { gsap } from "gsap";
@@ -17,13 +18,55 @@ export const Home = () => {
   const [vehiclePanelOpen, setVehiclePanelOpen] = useState(false);
   const [confirmRidePanel, setConfirmRidePanel] = useState(false);
   const [vehicleFound, setVehicleFound] = useState(false);
+
   const [waitingForDriverPanel, setWaitingForDriverPanel] = useState(false);
+  const [pickupSuggestions, setPickupSuggestions] = useState([]);
+  const [destinationSuggestions, setDestinationsSuggestions] = useState([]);
+  const [activeField, setActiveField] = useState(null);
 
   const vehiclePanelRef = useRef(null);
   const panelRef = useRef(null);
   const confirmRidePanelRef = useRef(null);
   const vehicleFoundRef = useRef(null);
   const WaitingForDriverRef = useRef(null);
+
+  const handlePickupChange = async (e) => {
+    e.preventDefault();
+    setPickup(e.target.value);
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`,
+        {
+          params: { input: e.target.value },
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      setPickupSuggestions(response.data.suggestions || []);
+    } catch (error) {
+      console.error("Error fetching pickup suggestions:", error);
+    }
+  };
+
+  const handleDestinationChange = async (e) => {
+    e.preventDefault();
+    setDestination(e.target.value);
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`,
+        {
+          params: { input: e.target.value },
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      setDestinationsSuggestions(response.data.suggestions || []);
+    } catch (error) {
+      console.error("Error fetching destination suggestions:", error);
+    }
+  };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -52,11 +95,11 @@ export const Home = () => {
   useGSAP(() => {
     if (vehiclePanelOpen) {
       gsap.to(vehiclePanelRef.current, {
-        transform: "translateY(0%)",
+        y: 0,
       });
     } else {
       gsap.to(vehiclePanelRef.current, {
-        transform: "translateY(100%)",
+        y: "100%",
       });
     }
   }, [vehiclePanelOpen]);
@@ -132,11 +175,10 @@ export const Home = () => {
               <input
                 type="text"
                 value={pickup}
-                onChange={(e) => {
-                  setPickup(e.target.value);
-                }}
+                onChange={handlePickupChange}
                 onClick={() => {
                   setPanelOpen(true);
+                  setActiveField("pickup");
                 }}
                 placeholder="Add a pick-up location"
                 className="w-full bg-gray-100 p-3 text-md text-center font-semibold border-2 border-black rounded-xl focus:outline-none focus:ring-1 focus:ring-black placeholder:text-sm hover:scale-105 transition-transform"
@@ -144,11 +186,10 @@ export const Home = () => {
               <input
                 type="text"
                 value={destination}
-                onChange={(e) => {
-                  setDestination(e.target.value);
-                }}
+                onChange={handleDestinationChange}
                 onClick={() => {
                   setPanelOpen(true);
+                  setActiveField("destination");
                 }}
                 placeholder="Enter your destination"
                 className="w-full bg-gray-100 p-3 text-md text-center font-semibold border-2 border-black rounded-xl focus:outline-none focus:ring-1 focus:ring-black placeholder:text-sm hover:scale-105 transition-transform"
@@ -157,8 +198,16 @@ export const Home = () => {
           </div>
           <div ref={panelRef} className="bg-white h-0 pr-5 pl-5">
             <LocationSearchPanel
+              suggestions={
+                activeField === "pickup"
+                  ? pickupSuggestions
+                  : destinationSuggestions
+              }
               setPanelOpen={setPanelOpen}
               setVehiclePanelOpen={setVehiclePanelOpen}
+              setPickup={setPickup}
+              setDestination={setDestination}
+              activeField={activeField}
             />
           </div>
         </div>
