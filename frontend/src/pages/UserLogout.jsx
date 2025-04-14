@@ -16,7 +16,6 @@ export const UserLogout = () => {
           },
         });
 
-        // Logout success: Remove token and update state
         localStorage.removeItem("token");
         setUser(null);
         navigate("/login");

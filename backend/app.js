@@ -3,10 +3,14 @@ const app = express();
 import expressSession from "express-session";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import userRoutes from "./routes/user.routes.js";
-import driverRoutes from "./routes/driver.routes.js";
 import connectToDb from "./db/db.js";
 connectToDb();
+
+// Routes
+import userRoutes from "./routes/user.routes.js";
+import driverRoutes from "./routes/driver.routes.js";
+import mapRoutes from "./routes/googlemaps.routes.js";
+import rideRoutes from "./routes/ride.routes.js";
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -37,5 +41,7 @@ app.get("/", (req, res) => {
 
 app.use("/users", userRoutes);
 app.use("/drivers", driverRoutes);
+app.use("/maps", mapRoutes);
+app.use("/rides", rideRoutes);
 
 export default app;

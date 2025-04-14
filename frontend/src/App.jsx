@@ -12,6 +12,8 @@ import { UserLogout } from "./pages/UserLogout";
 import { DriverHome } from "./pages/DriverHome";
 import { DriverProtectedWrapper } from "./context/DriverProtectedWrapper";
 import { DriverLogout } from "./pages/DriverLogout";
+import { Riding } from "./pages/Riding";
+import { DriverRiding } from "./pages/DriverRiding";
 export function App() {
   const ans = useContext(UserDataContext);
 
@@ -32,6 +34,14 @@ export function App() {
           }
         />
         <Route
+          path="/riding"
+          element={
+            <UserProtectedWrapper>
+              <Riding />
+            </UserProtectedWrapper>
+          }
+        />
+        <Route
           path="/user/logout"
           element={
             <UserProtectedWrapper>
@@ -39,6 +49,7 @@ export function App() {
             </UserProtectedWrapper>
           }
         />
+
         <Route
           path="/driver-home"
           element={
@@ -52,6 +63,14 @@ export function App() {
           element={
             <DriverProtectedWrapper>
               <DriverLogout />
+            </DriverProtectedWrapper>
+          }
+        />
+        <Route
+          path="/driver-riding"
+          element={
+            <DriverProtectedWrapper>
+              <DriverRiding />
             </DriverProtectedWrapper>
           }
         />

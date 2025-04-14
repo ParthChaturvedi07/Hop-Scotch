@@ -1,13 +1,13 @@
 import React, { useRef, useState } from "react";
 import Logo from "../assets/images/031bd833-fab5-4988-93d4-a2165eddbc92-removebg-preview.png";
-import streetMap from "../assets/images/ubermapvisuals-thumb-640xauto-905052.png";
+import streetMap from "../assets/images/0_gwMx05pqII5hbfmX.gif";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import "remixicon/fonts/remixicon.css";
 import { LocationSearchPanel } from "../components/LocationSearchPanel";
 import { ConfirmedRide } from "../components/ConfirmedRide";
 import { VehiclePanel } from "../components/VehiclePanel";
-import { WaitingForDriver } from "../components/WaitinfForDriver";
+import { WaitingForDriver } from "../components/WaitingForDriver";
 import { LookingForDriver } from "../components/LookingForDriver";
 
 export const Home = () => {
@@ -85,17 +85,17 @@ export const Home = () => {
     }
   }, [vehicleFound]);
 
-  // useGSAP(() => {
-  //   if (waitingForDriverPanel) {
-  //     gsap.to(WaitingForDriverRef.current, {
-  //       y: 0,
-  //     });
-  //   } else {
-  //     gsap.to(WaitingForDriverRef.current, {
-  //       y: "100% ",
-  //     });
-  //   }
-  // }, [WaitingForDriverRef]);
+  useGSAP(() => {
+    if (waitingForDriverPanel) {
+      gsap.to(WaitingForDriverRef.current, {
+        y: 0,
+      });
+    } else {
+      gsap.to(WaitingForDriverRef.current, {
+        y: "100% ",
+      });
+    }
+  }, [WaitingForDriverRef]);
 
   return (
     <>

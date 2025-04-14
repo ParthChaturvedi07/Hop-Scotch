@@ -14,7 +14,6 @@ export const WaitingForDriver = (props) => {
         <i className="ri-arrow-down-double-line"></i>
       </h5>
 
-      {/* Driver Info */}
       <div className="flex items-center justify-between bg-white px-4 py-3 border-2 border-black rounded-xl shadow-[3px_3px_0_rgba(0,0,0,1)]">
         <img className="h-20 animate-bounce-subtle" src={carLogo} alt="Car" />
         <div className="text-right">
@@ -24,9 +23,7 @@ export const WaitingForDriver = (props) => {
         </div>
       </div>
 
-      {/* Location and Price Cards */}
       <div className="flex flex-col gap-3 items-center">
-        {/* Pickup */}
         <div className="w-full flex items-center gap-4 p-3 border-2 border-black rounded-xl bg-gray-50 shadow-[3px_3px_0_rgba(0,0,0,1)]">
           <i className="ri-map-pin-user-fill text-xl"></i>
           <div>
@@ -37,7 +34,6 @@ export const WaitingForDriver = (props) => {
           </div>
         </div>
 
-        {/* Destination */}
         <div className="w-full flex items-center gap-4 p-3 border-2 border-black rounded-xl bg-gray-50 shadow-[3px_3px_0_rgba(0,0,0,1)]">
           <i className="ri-map-pin-user-fill text-xl"></i>
           <div>
@@ -46,7 +42,6 @@ export const WaitingForDriver = (props) => {
           </div>
         </div>
 
-        {/* Fare */}
         <div className="w-full flex items-center gap-4 p-3 border-2 border-black rounded-xl bg-gray-50 shadow-[3px_3px_0_rgba(0,0,0,1)]">
           <i className="ri-money-rupee-circle-fill text-xl"></i>
           <div>
