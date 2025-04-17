@@ -32,7 +32,8 @@ export const UserSignUp = () => {
 
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/users/register`,
-        newUser
+        newUser,
+        { withCredentials: true }
       );
 
       if (response.status === 201) {

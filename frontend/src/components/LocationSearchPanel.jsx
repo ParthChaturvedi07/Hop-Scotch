@@ -7,6 +7,7 @@ export const LocationSearchPanel = ({
   setPickup,
   setDestination,
   activeField,
+  findFare,
 }) => {
   const handleSuggestionClick = (suggestion) => {
     if (activeField === "pickup") {
@@ -15,6 +16,7 @@ export const LocationSearchPanel = ({
       setDestination(suggestion.description);
       setVehiclePanelOpen(true);
       setPanelOpen(false);
+      findFare();
     }
   };
 

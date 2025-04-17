@@ -36,7 +36,9 @@ export const VehiclePanel = (props) => {
             Affordable, Car rides
           </p>
         </div>
-        <h2 className="text-lg font-semibold">₹193.20</h2>
+        <h2 className="text-lg font-semibold">
+          ₹{props.fare?.car?.toFixed(2) || "N/A"}
+        </h2>
       </div>
       <div
         onClick={() => {
@@ -58,7 +60,9 @@ export const VehiclePanel = (props) => {
             Affordable, Motorcycle rides
           </p>
         </div>
-        <h2 className="text-lg font-semibold">₹88.22</h2>
+        <h2 className="text-lg font-semibold">
+          ₹{props.fare?.motorcycle?.toFixed(2) || "N/A"}
+        </h2>
       </div>
       <div
         onClick={() => {
@@ -80,7 +84,9 @@ export const VehiclePanel = (props) => {
             Affordable, Auto Rickshaw rides
           </p>
         </div>
-        <h2 className="text-lg font-semibold">₹120.07</h2>
+        <h2 className="text-lg font-semibold">
+          ₹{props.fare?.auto?.toFixed(2) || "N/A"}
+        </h2>
       </div>
     </>
   );

@@ -23,6 +23,7 @@ export const Home = () => {
   const [pickupSuggestions, setPickupSuggestions] = useState([]);
   const [destinationSuggestions, setDestinationsSuggestions] = useState([]);
   const [activeField, setActiveField] = useState(null);
+  const [fare, setFare] = useState({});
 
   const vehiclePanelRef = useRef(null);
   const panelRef = useRef(null);
@@ -140,6 +141,24 @@ export const Home = () => {
     }
   }, [WaitingForDriverRef]);
 
+  const findFare = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/rides/get-fare`,
+        {
+          params: { pickup, destination },
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      console.log(response.data);
+      setFare(response.data.fare || {});
+    } catch (error) {
+      console.error("Error fetching fare:", error);
+    }
+  };
+
   return (
     <>
       <div className="h-screen relative">
@@ -170,8 +189,11 @@ export const Home = () => {
                 <i className="ri-arrow-down-double-line"></i>
               </h5>
             </div>
-            <form onSubmit={(e) => onSubmitHandler(e)} className="space-y-2">
-              <div className="line absolute h-20 w-1 top-[40%] bg-gray-900 left-10 rounded-full"></div>
+            <form
+              onSubmit={(e) => onSubmitHandler(e)}
+              className="space-y-2 relative"
+            >
+              <div className="line absolute h-20 w-1 top-[21%] bg-gray-900 left-10 rounded-full"></div>
               <input
                 type="text"
                 value={pickup}
@@ -208,6 +230,7 @@ export const Home = () => {
               setPickup={setPickup}
               setDestination={setDestination}
               activeField={activeField}
+              findFare={findFare}
             />
           </div>
         </div>
@@ -219,6 +242,7 @@ export const Home = () => {
           <VehiclePanel
             setConfirmRidePanel={setConfirmRidePanel}
             setVehiclePanelOpen={setVehiclePanelOpen}
+            fare={fare}
           />
         </div>
 

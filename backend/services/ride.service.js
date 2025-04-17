@@ -2,14 +2,24 @@ import rideModel from "../models/ride.model.js";
 import * as mapsService from "./googlemaps.service.js";
 import crypto from "crypto";
 
-const getFare = async (pickup, destination) => {
+export const getFare = async (pickup, destination) => {
   if (!pickup || !destination) {
     throw new Error("Pickup and destination are required");
   }
 
   const distanceTime = await mapsService.getDistanceTime(pickup, destination);
 
-  //   console.log(distanceTime);
+  console.log(distanceTime);
+
+  // if (
+  //   !distanceTime ||
+  //   !distanceTime.distance ||
+  //   !distanceTime.duration ||
+  //   typeof distanceTime.distance.value !== "number" ||
+  //   typeof distanceTime.duration.value !== "number"
+  // ) {
+  //   throw new Error("Invalid distance or duration data");
+  // }
 
   const baseFare = {
     auto: 30,
