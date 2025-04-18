@@ -19,11 +19,16 @@ export const Home = () => {
   const [confirmRidePanel, setConfirmRidePanel] = useState(false);
   const [vehicleFound, setVehicleFound] = useState(false);
 
+  // console.log(pickup, destination);
+
   const [waitingForDriverPanel, setWaitingForDriverPanel] = useState(false);
   const [pickupSuggestions, setPickupSuggestions] = useState([]);
   const [destinationSuggestions, setDestinationsSuggestions] = useState([]);
   const [activeField, setActiveField] = useState(null);
   const [fare, setFare] = useState({});
+  const [vehicleType, setVehicleType] = useState(null);
+
+  console.log(vehicleType);
 
   const vehiclePanelRef = useRef(null);
   const panelRef = useRef(null);
@@ -142,6 +147,11 @@ export const Home = () => {
   }, [WaitingForDriverRef]);
 
   const findFare = async () => {
+    if (!pickup || !destination) {
+      console.error("Pickup and destination are required");
+      return;
+    }
+
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/rides/get-fare`,
@@ -152,11 +162,30 @@ export const Home = () => {
           },
         }
       );
+      setVehiclePanelOpen(true);
+      setPanelOpen(false);
       console.log(response.data);
       setFare(response.data.fare || {});
     } catch (error) {
       console.error("Error fetching fare:", error);
     }
+  };
+
+  const createRide = async () => {
+    const response = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/rides/create`,
+      {
+        pickup,
+        destination,
+        vehicleType,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    console.log(response.data);
   };
 
   return (
@@ -193,7 +222,7 @@ export const Home = () => {
               onSubmit={(e) => onSubmitHandler(e)}
               className="space-y-2 relative"
             >
-              <div className="line absolute h-20 w-1 top-[21%] bg-gray-900 left-10 rounded-full"></div>
+              <div className="line absolute h-12 w-1 top-[34%] bg-gray-900 left-5 rounded-full"></div>
               <input
                 type="text"
                 value={pickup}
@@ -242,6 +271,7 @@ export const Home = () => {
           <VehiclePanel
             setConfirmRidePanel={setConfirmRidePanel}
             setVehiclePanelOpen={setVehiclePanelOpen}
+            selectVehicle={setVehicleType}
             fare={fare}
           />
         </div>
@@ -253,6 +283,11 @@ export const Home = () => {
           <ConfirmedRide
             setConfirmRidePanel={setConfirmRidePanel}
             setVehicleFound={setVehicleFound}
+            pickup={pickup}
+            destination={destination}
+            fare={fare}
+            vehicleType={vehicleType}
+            createRide={createRide}
           />
         </div>
 
@@ -260,7 +295,13 @@ export const Home = () => {
           ref={vehicleFoundRef}
           className="fixed w-full z-10 bottom-0 bg-white px-3 py-6 translate-y-full rounded-t-2xl border-t-4 border-black shadow-[0_-5px_20px_rgba(0,0,0,0.2)]"
         >
-          <LookingForDriver setVehicleFound={setVehicleFound} />
+          <LookingForDriver
+            setVehicleFound={setVehicleFound}
+            pickup={pickup}
+            destination={destination}
+            fare={fare}
+            vehicleType={vehicleType}
+          />
         </div>
       </div>
 

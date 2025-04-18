@@ -14,14 +14,17 @@ export const LocationSearchPanel = ({
       setPickup(suggestion.description);
     } else if (activeField === "destination") {
       setDestination(suggestion.description);
-      setVehiclePanelOpen(true);
-      setPanelOpen(false);
-      findFare();
     }
   };
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex items-center flex-col gap-2">
+      <button
+        onClick={findFare}
+        className=" w-[70%] bg-yellow-300 border-2 border-black text-black font-semibold p-3 rounded-xl shadow-[3px_3px_0_rgba(0,0,0,1)] hover:scale-105 transition-transform"
+      >
+        Find Your Ride
+      </button>
       {suggestions.map((elem, index) => (
         <div
           key={index}

@@ -35,6 +35,9 @@ export const getFare = async (req, res) => {
   }
 
   const { pickup, destination } = req.query;
+  console.log("Pickup:", pickup);
+  console.log("Destination:", destination);
+
   try {
     const fare = await rideService.getFare(pickup, destination);
     return res.status(200).json({
