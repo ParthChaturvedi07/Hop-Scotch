@@ -18,8 +18,32 @@ HopScotch is a cartoonish, fun-themed **MERN stack taxi booking app** built for 
 - **Tailwind CSS** – Utility-first CSS with custom cartoonish styles
 - **GSAP** – For smooth and goofy animations (slide panels, bounce effects)
 
----
+## 📦 Features (current status)
 
+### 👤 User
+- [x] Set pickup and drop locations
+- [x] View fare estimate
+- [x] Confirm ride
+- [x] Live driver tracking
+- [x] Cancel ride
+
+### 🚗 Driver
+- [x] Login/Register with protected routes
+- [x] View available ride requests
+- [x] Accept/Reject ride
+- [x] Navigate to pickup and drop
+- [x] Complete ride
+
+### 🔐 Auth
+- JWT-based authentication for both users and drivers
+- Protected routes with role-based access
+- Password reset functionality added
+- Enhanced token expiration handling
+- Multi-factor authentication (MFA) in progress
+- Improved session management
+- Admin role for monitoring and managing users/drivers
+- Rate-limiting for login attempts
+- CAPTCHA integration for bot prevention
 ## 📦 Features (in progress)
 
 ### 👤 User
