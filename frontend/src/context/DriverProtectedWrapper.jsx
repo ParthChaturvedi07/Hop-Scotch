@@ -32,7 +32,7 @@ export const DriverProtectedWrapper = ({ children }) => {
         localStorage.removeItem("token");
         navigate("/driver-login");
       });
-  }, [navigate, setDriver]);
+  }, [token]);
 
   if (isLoading) {
     return <div>Loading...</div>;

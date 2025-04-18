@@ -24,7 +24,7 @@ export const RidePopUp = (props) => {
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT13yGsjxBwuebdAD9_KMT5t84rzyDGFsLYow&s"
             alt=""
           />
-          <h2 className="text-lg font-medium">Manhus Kanpuri</h2>
+          <h2 className="text-lg font-medium">Sample Ride Pop Up</h2>
         </div>
         <h5 className="text-lg font-semibold">2.2 KM</h5>
       </div>

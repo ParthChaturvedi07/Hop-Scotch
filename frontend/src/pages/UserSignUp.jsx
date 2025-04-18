@@ -39,6 +39,7 @@ export const UserSignUp = () => {
       if (response.status === 201) {
         const data = response.data;
         setUser(data.user);
+        localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("token", data.token);
         navigate("/home");
       }

@@ -49,6 +49,7 @@ export const DriverSignUp = () => {
       if (response.status === 201) {
         const data = response.data;
         setDriver(data.driver);
+        localStorage.setItem("driver", JSON.stringify(data.driver));
         localStorage.setItem("token", data.token);
         navigate("/driver-home");
       }

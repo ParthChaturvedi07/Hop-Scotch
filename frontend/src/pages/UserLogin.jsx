@@ -27,6 +27,7 @@ export const UserLogin = () => {
       if (response.status === 200 || response.status === 201) {
         const data = response.data;
         setUser(data.user);
+        localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("token", data.token);
         setEmail("");
         setPassword("");

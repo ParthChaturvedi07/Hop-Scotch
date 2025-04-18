@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createContext } from "react";
 
 export const DriverDataContext = createContext();
+
 export const DriverContext = ({ children }) => {
   const [driver, setDriver] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  // useEffect(() => {
+  //   console.log("Driver context updated:", driver);
+  // }, [driver]);
 
   const updateDriver = (driverData) => {
     setDriver(driverData);
@@ -22,10 +27,8 @@ export const DriverContext = ({ children }) => {
   };
 
   return (
-    <div>
-      <DriverDataContext.Provider value={value}>
-        {children}
-      </DriverDataContext.Provider>
-    </div>
+    <DriverDataContext.Provider value={value}>
+      {children}
+    </DriverDataContext.Provider>
   );
 };

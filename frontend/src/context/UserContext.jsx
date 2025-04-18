@@ -7,6 +7,8 @@ export const UserContext = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // console.log(user);
+
   const value = {
     user,
     setUser,

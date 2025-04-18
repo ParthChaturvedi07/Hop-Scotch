@@ -8,7 +8,10 @@ export const DriverLogin = () => {
   const [password, setPassword] = useState("");
 
   const { driver, setDriver } = React.useContext(DriverDataContext);
+  console.log("Driver details:", driver);
+
   const navigate = useNavigate();
+
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -25,6 +28,7 @@ export const DriverLogin = () => {
       if (response.status === 200 || response.status === 201) {
         const data = response.data;
         setDriver(data.driver);
+        localStorage.setItem("driver", JSON.stringify(data.driver));
         localStorage.setItem("token", data.token);
         setEmail("");
         setPassword("");

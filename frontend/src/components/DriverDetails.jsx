@@ -1,6 +1,10 @@
 import React from "react";
 
 export const DriverDetails = () => {
+  const driver = JSON.parse(localStorage.getItem("driver"));
+
+  console.log(driver);
+
   return (
     <>
       <div className="flex items-center justify-between">
@@ -10,7 +14,9 @@ export const DriverDetails = () => {
             src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8fDA%3D"
             alt=""
           />
-          <h4 className="text-lg font-medium">Harsh Patel</h4>
+          <h4 className="text-lg font-medium">
+            {driver.fullName.firstName + " " + driver.fullName.lastName}
+          </h4>
         </div>
         <div>
           <h4 className="text-xl font-semibold">₹193.28</h4>

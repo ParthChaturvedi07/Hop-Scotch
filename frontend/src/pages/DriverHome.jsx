@@ -7,8 +7,11 @@ import { RidePopUp } from "../components/RidePopUp";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ConfirmRidePopUp } from "../components/ConfirmRidePopUp";
+// import { DriverDataContext } from "../context/DriverContext";
 
 export const DriverHome = () => {
+  // const { driver } = React.useContext(DriverDataContext);
+
   const [ridePopUpPanel, setRidePopUpPanel] = useState(true);
   const [confirmRidePopUpPanel, setConfirmRidePopUpPanel] = useState(false);
 
