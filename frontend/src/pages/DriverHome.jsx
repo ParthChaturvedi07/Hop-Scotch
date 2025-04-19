@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import streetMap from "../assets/images/0_gwMx05pqII5hbfmX.gif";
 import Logo from "../assets/images/031bd833-fab5-4988-93d4-a2165eddbc92-removebg-preview.png";
 import { Link } from "react-router-dom";
@@ -7,16 +7,49 @@ import { RidePopUp } from "../components/RidePopUp";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ConfirmRidePopUp } from "../components/ConfirmRidePopUp";
-// import { DriverDataContext } from "../context/DriverContext";
+import { SocketContext } from "../context/SocketContext";
 
 export const DriverHome = () => {
-  // const { driver } = React.useContext(DriverDataContext);
-
   const [ridePopUpPanel, setRidePopUpPanel] = useState(true);
   const [confirmRidePopUpPanel, setConfirmRidePopUpPanel] = useState(false);
 
   const ridePopupRef = useRef(null);
   const confirmRidePopupRef = useRef(null);
+
+  const { socket } = useContext(SocketContext);
+  const driver = JSON.parse(localStorage.getItem("driver"));
+
+  useEffect(() => {
+    socket.emit("join", {
+      userType: "driver",
+      userId: driver._id,
+    });
+
+    const updateLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          console.log({
+            userId: driver._id,
+            location: {
+              ltd: position.coords.latitude,
+              lng: position.coords.longitude,
+            },
+          });
+
+          socket.emit("update-location-driver", {
+            userId: driver._id,
+            location: {
+              ltd: position.coords.latitude,
+              lng: position.coords.longitude,
+            },
+          });
+        });
+      }
+    };
+
+    const locationInterval = setInterval(updateLocation, 10000);
+    updateLocation();
+  });
 
   useGSAP(() => {
     if (ridePopUpPanel) {

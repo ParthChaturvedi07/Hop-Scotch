@@ -8,8 +8,6 @@ export const DriverLogin = () => {
   const [password, setPassword] = useState("");
 
   const { driver, setDriver } = React.useContext(DriverDataContext);
-  console.log("Driver details:", driver);
-
   const navigate = useNavigate();
 
   const submitHandler = async (e) => {

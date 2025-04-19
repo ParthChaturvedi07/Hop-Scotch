@@ -1,4 +1,5 @@
 import axios from "axios";
+import driversModel from "../models/drivers.model.js";
 
 export const getAddressCoordinates = async (address) => {
   const apiKey = process.env.GOOGLE_MAPS_API_KEY;
@@ -69,4 +70,14 @@ export const getAutoCompleteSuggestions = async (input) => {
     console.log(error);
     throw error;
   }
+};
+
+export const getDriversInTheRadius = async (lat, lng, radius) => {
+  const drivers = await driversModel.find({
+    location: {
+      $geoWithin: {
+        $centerSphere: [[ltd, lng], radius / 3963.2],
+      },
+    },
+  });
 };

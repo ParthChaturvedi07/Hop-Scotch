@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Logo from "../assets/images/031bd833-fab5-4988-93d4-a2165eddbc92-removebg-preview.png";
 import streetMap from "../assets/images/0_gwMx05pqII5hbfmX.gif";
@@ -10,6 +10,8 @@ import { ConfirmedRide } from "../components/ConfirmedRide";
 import { VehiclePanel } from "../components/VehiclePanel";
 import { WaitingForDriver } from "../components/WaitingForDriver";
 import { LookingForDriver } from "../components/LookingForDriver";
+import { SocketContext } from "../context/SocketContext";
+import { UserDataContext } from "../context/UserContext";
 
 export const Home = () => {
   const [pickup, setPickup] = useState("");
@@ -28,7 +30,19 @@ export const Home = () => {
   const [fare, setFare] = useState({});
   const [vehicleType, setVehicleType] = useState(null);
 
-  console.log(vehicleType);
+  // console.log(vehicleType);
+
+  const { socket } = useContext(SocketContext);
+  // const {user} = useContext(UserDataContext);
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user);
+
+  useEffect(() => {
+    socket.emit("join", {
+      userType: "user",
+      userId: user._id,
+    });
+  }, [user]);
 
   const vehiclePanelRef = useRef(null);
   const panelRef = useRef(null);

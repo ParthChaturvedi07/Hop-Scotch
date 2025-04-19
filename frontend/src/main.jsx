@@ -6,13 +6,18 @@ import { App } from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { UserContext } from "./context/UserContext.jsx";
 import { DriverContext } from "./context/DriverContext.jsx";
+import { SocketProvider } from "./context/SocketContext.jsx";
 
 createRoot(document.getElementById("root")).render(
-  <DriverContext>
-    <UserContext>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </UserContext>
-  </DriverContext>
+  <BrowserRouter>
+    <DriverContext>
+      <UserContext>
+        <SocketProvider>
+          <StrictMode>
+            <App />
+          </StrictMode>
+        </SocketProvider>
+      </UserContext>
+    </DriverContext>
+  </BrowserRouter>
 );
