@@ -4,6 +4,7 @@ import { body, query } from "express-validator";
 import { authUser } from "../middlewares/auth.middleware.js";
 
 import * as rideController from "../controllers/ride.controller.js";
+import { authDriver } from "../middlewares/authDriver.middleware.js";
 
 router.post(
   "/create",
@@ -35,6 +36,13 @@ router.get(
     .withMessage("Destination location must be at least 3 characters long"),
   authUser,
   rideController.getFare
+);
+
+router.post(
+  "/confirm",
+  body("rideId").isMongoId().withMessage("Invalid ride ID"),
+  authDriver,
+  rideController.confirmRide
 );
 
 export default router;

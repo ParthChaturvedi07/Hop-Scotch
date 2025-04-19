@@ -1,5 +1,8 @@
 import * as rideService from "../services/ride.service.js";
+import * as googleMapsService from "../services/googlemaps.service.js";
 import { validationResult } from "express-validator";
+import { sendMessageToSocketId } from "../socket.js";
+import rideModel from "../models/ride.model.js";
 
 export const createRide = async (req, res) => {
   const errors = validationResult(req);
@@ -18,9 +21,33 @@ export const createRide = async (req, res) => {
       vehicleType,
     });
 
-    return res.status(201).json({
+    res.status(201).json({
       message: "Ride created successfully",
       ride,
+    });
+
+    const pickupCoordinates = await googleMapsService.getAddressCoordinates(
+      pickup
+    );
+    console.log("Pickup Coordinates:", pickupCoordinates);
+
+    const driversInRadius = await googleMapsService.getDriversInTheRadius(
+      pickupCoordinates.ltd,
+      pickupCoordinates.lng,
+      2
+    );
+
+    ride.otp = "";
+
+    const rideWithUser = await rideModel.findOne(ride._id).populate("user");
+
+    driversInRadius.map((driver) => {
+      // console.log(driver, ride);
+
+      sendMessageToSocketId(driver.socketId, {
+        event: "new-ride",
+        data: rideWithUser,
+      });
     });
   } catch (error) {
     console.error("Error creating ride:", error);
@@ -49,3 +76,7 @@ export const getFare = async (req, res) => {
     res.status(500).json({ message: "Error calculating fare" });
   }
 };
+
+export const confirmRide = async (req, res) => {
+  
+}

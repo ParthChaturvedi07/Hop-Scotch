@@ -12,7 +12,7 @@ export const getAddressCoordinates = async (address) => {
     if (response.data.status === "OK") {
       // Extracting the latitude and longitude from the response
       const location = response.data.results[0].geometry.location;
-      return { lat: location.lat, lng: location.lng };
+      return { ltd: location.lat, lng: location.lng };
     } else {
       throw new Error(`Error fetching coordinates: ${response.data.status}`);
     }
@@ -72,12 +72,16 @@ export const getAutoCompleteSuggestions = async (input) => {
   }
 };
 
-export const getDriversInTheRadius = async (lat, lng, radius) => {
+export const getDriversInTheRadius = async (ltd, lng, radius) => {
+  //  radius in KM
+
   const drivers = await driversModel.find({
     location: {
       $geoWithin: {
-        $centerSphere: [[ltd, lng], radius / 3963.2],
+        $centerSphere: [[ltd, lng], radius / 6371],
       },
     },
   });
+
+  return drivers;
 };

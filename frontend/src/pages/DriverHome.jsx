@@ -10,11 +10,13 @@ import { ConfirmRidePopUp } from "../components/ConfirmRidePopUp";
 import { SocketContext } from "../context/SocketContext";
 
 export const DriverHome = () => {
-  const [ridePopUpPanel, setRidePopUpPanel] = useState(true);
+  const [ridePopUpPanel, setRidePopUpPanel] = useState(false);
   const [confirmRidePopUpPanel, setConfirmRidePopUpPanel] = useState(false);
 
   const ridePopupRef = useRef(null);
   const confirmRidePopupRef = useRef(null);
+
+  const [ride, setRide] = useState(null);
 
   const { socket } = useContext(SocketContext);
   const driver = JSON.parse(localStorage.getItem("driver"));
@@ -28,13 +30,13 @@ export const DriverHome = () => {
     const updateLocation = () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
-          console.log({
-            userId: driver._id,
-            location: {
-              ltd: position.coords.latitude,
-              lng: position.coords.longitude,
-            },
-          });
+          // console.log({
+          //   userId: driver._id,
+          //   location: {
+          //     ltd: position.coords.latitude,
+          //     lng: position.coords.longitude,
+          //   },
+          // });
 
           socket.emit("update-location-driver", {
             userId: driver._id,
@@ -50,6 +52,20 @@ export const DriverHome = () => {
     const locationInterval = setInterval(updateLocation, 10000);
     updateLocation();
   });
+
+  socket.on("new-ride", (data) => {
+    console.log("New ride request received:", data);
+    setRide(data);
+    // setConfirmRidePopUpPanel(true);
+    setRidePopUpPanel(true);
+  });
+
+
+  async function confirmRide() {
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/rides/confirm`, {
+      
+    })
+  }
 
   useGSAP(() => {
     if (ridePopUpPanel) {
@@ -97,6 +113,7 @@ export const DriverHome = () => {
         className="fixed w-full z-10 bottom-0 bg-white translate-y-full rounded-t-2xl border-black border-t-4 shadow-[0_-5px_20px_rgba(0,0,0,0.2)]"
       >
         <RidePopUp
+          ride={ride}
           setConfirmRidePopUpPanel={setConfirmRidePopUpPanel}
           setRidePopUpPanel={setRidePopUpPanel}
         />

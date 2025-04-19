@@ -24,7 +24,11 @@ export const RidePopUp = (props) => {
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT13yGsjxBwuebdAD9_KMT5t84rzyDGFsLYow&s"
             alt=""
           />
-          <h2 className="text-lg font-medium">Sample Ride Pop Up</h2>
+          <h2 className="text-lg font-medium">
+            {props.ride?.user.fullName.firstName +
+              " " +
+              props.ride?.user.fullName.lastName}
+          </h2>
         </div>
         <h5 className="text-lg font-semibold">2.2 KM</h5>
       </div>
@@ -39,9 +43,7 @@ export const RidePopUp = (props) => {
             <i className="ri-map-pin-user-fill"></i>
             <div>
               <h3 className="text-lg font-medium">562/11-A</h3>
-              <p className="text-sm -mt-1 text-gray-600">
-                Kantariya Talab, Kanpur
-              </p>
+              <p className="text-sm -mt-1 text-gray-600">{props.ride?.pickup}</p>
             </div>
           </div>
           <div>
@@ -50,7 +52,7 @@ export const RidePopUp = (props) => {
               <div>
                 <h3 className="text-lg font-medium">48/B</h3>
                 <p className="text-sm -mt-1 text-gray-600">
-                  Shyam Nagar, Kanpur
+                  {props.ride?.destination}
                 </p>
               </div>
             </div>
@@ -60,10 +62,8 @@ export const RidePopUp = (props) => {
               <div className="flex items-center gap-5 p-2 border-2 border-black rounded-xl bg-gray-50 shadow-[3px_3px_0_rgba(0,0,0,1)] ">
                 <i className="ri-money-rupee-circle-fill"></i>
                 <div>
-                  <h3 className="text-lg font-medium">₹193.20</h3>
-                  <p className="text-sm -mt-1 text-gray-600">
-                    Kantariya Talab, Kanpur
-                  </p>
+                  <h3 className="text-lg font-medium">₹{props.ride?.fare.toFixed(2)}</h3>
+                  <p className="text-sm -mt-1 text-gray-600">Cash 💵</p>
                 </div>
               </div>
             </div>
