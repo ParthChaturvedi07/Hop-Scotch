@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
+import axios from "axios";
 import streetMap from "../assets/images/0_gwMx05pqII5hbfmX.gif";
 import Logo from "../assets/images/031bd833-fab5-4988-93d4-a2165eddbc92-removebg-preview.png";
 import { Link } from "react-router-dom";
@@ -60,11 +61,29 @@ export const DriverHome = () => {
     setRidePopUpPanel(true);
   });
 
-
   async function confirmRide() {
-    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/rides/confirm`, {
-      
-    })
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/rides/confirm`,
+        {
+          rideId: ride._id,
+          driverId: driver._id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      setRidePopUpPanel(false);
+      setConfirmRidePopUpPanel(true);
+      console.log("Ride confirmed:", response.data);
+    } catch (error) {
+      console.error(
+        "Error confirming ride:",
+        error.response?.data || error.message
+      );
+    }
   }
 
   useGSAP(() => {
@@ -116,6 +135,7 @@ export const DriverHome = () => {
           ride={ride}
           setConfirmRidePopUpPanel={setConfirmRidePopUpPanel}
           setRidePopUpPanel={setRidePopUpPanel}
+          confirmRide={confirmRide}
         />
       </div>
       <div
@@ -123,6 +143,7 @@ export const DriverHome = () => {
         className="fixed w-full z-10 bottom-0 bg-white translate-y-full rounded-t-2xl border-black border-t-4 shadow-[0_-5px_20px_rgba(0,0,0,0.2)]"
       >
         <ConfirmRidePopUp
+          ride={ride}
           setConfirmRidePopUpPanel={setConfirmRidePopUpPanel}
           setRidePopUpPanel={setRidePopUpPanel}
         />

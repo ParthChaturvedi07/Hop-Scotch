@@ -43,7 +43,9 @@ export const RidePopUp = (props) => {
             <i className="ri-map-pin-user-fill"></i>
             <div>
               <h3 className="text-lg font-medium">562/11-A</h3>
-              <p className="text-sm -mt-1 text-gray-600">{props.ride?.pickup}</p>
+              <p className="text-sm -mt-1 text-gray-600">
+                {props.ride?.pickup}
+              </p>
             </div>
           </div>
           <div>
@@ -62,7 +64,9 @@ export const RidePopUp = (props) => {
               <div className="flex items-center gap-5 p-2 border-2 border-black rounded-xl bg-gray-50 shadow-[3px_3px_0_rgba(0,0,0,1)] ">
                 <i className="ri-money-rupee-circle-fill"></i>
                 <div>
-                  <h3 className="text-lg font-medium">₹{props.ride?.fare.toFixed(2)}</h3>
+                  <h3 className="text-lg font-medium">
+                    ₹{props.ride?.fare.toFixed(2)}
+                  </h3>
                   <p className="text-sm -mt-1 text-gray-600">Cash 💵</p>
                 </div>
               </div>
@@ -72,7 +76,7 @@ export const RidePopUp = (props) => {
         <div className="flex items-center justify-between gap-4 w-full mt-3">
           <button
             onClick={() => {
-              props.setConfirmRidePopUpPanel(true);
+              props.confirmRide();
             }}
             className="w-full bg-green-500 border-2 border-black text-white font-semibold p-3 rounded-xl shadow-[3px_3px_0_rgba(0,0,0,1)] hover:scale-105 transition-transform"
           >

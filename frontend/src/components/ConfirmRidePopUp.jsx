@@ -6,6 +6,8 @@ export const ConfirmRidePopUp = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+
   };
 
   return (
@@ -31,7 +33,11 @@ export const ConfirmRidePopUp = (props) => {
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT13yGsjxBwuebdAD9_KMT5t84rzyDGFsLYow&s"
             alt=""
           />
-          <h2 className="text-lg font-medium">Manhus Kanpuri</h2>
+          <h2 className="text-lg font-medium">
+            {props.ride?.user.fullName.firstName +
+              " " +
+              props.ride?.user.fullName.lastName}
+          </h2>
         </div>
         <h5 className="text-lg font-semibold">2.2 KM</h5>
       </div>
@@ -47,7 +53,7 @@ export const ConfirmRidePopUp = (props) => {
             <div>
               <h3 className="text-lg font-medium">562/11-A</h3>
               <p className="text-sm -mt-1 text-gray-600">
-                Kantariya Talab, Kanpur
+                {props.ride?.pickup}
               </p>
             </div>
           </div>
@@ -57,7 +63,7 @@ export const ConfirmRidePopUp = (props) => {
               <div>
                 <h3 className="text-lg font-medium">48/B</h3>
                 <p className="text-sm -mt-1 text-gray-600">
-                  Shyam Nagar, Kanpur
+                  {props.ride?.destination}
                 </p>
               </div>
             </div>
@@ -67,10 +73,10 @@ export const ConfirmRidePopUp = (props) => {
               <div className="flex items-center gap-5 p-2 border-2 border-black rounded-xl bg-gray-50 shadow-[3px_3px_0_rgba(0,0,0,1)] ">
                 <i className="ri-money-rupee-circle-fill"></i>
                 <div>
-                  <h3 className="text-lg font-medium">₹193.20</h3>
-                  <p className="text-sm -mt-1 text-gray-600">
-                    Kantariya Talab, Kanpur
-                  </p>
+                  <h3 className="text-lg font-medium">
+                    ₹{props.ride?.fare.toFixed(2)}
+                  </h3>
+                  <p className="text-sm -mt-1 text-gray-600">Cash 💵</p>
                 </div>
               </div>
             </div>
@@ -91,13 +97,12 @@ export const ConfirmRidePopUp = (props) => {
             className="w-full bg-gray-100 p-3 text-md text-center font-semibold border-2 border-black rounded-xl focus:outline-none focus:ring-1 focus:ring-black placeholder:text-sm transition-transform"
           />
           <div className="flex items-center justify-between gap-4 w-full">
-            <Link
-              to="/driver-riding"
+            <button
               onClick={() => {}}
               className="text-center w-full bg-green-500 border-2 border-black text-white font-semibold p-3 rounded-xl shadow-[3px_3px_0_rgba(0,0,0,1)] hover:scale-105 transition-transform"
             >
               Confirm
-            </Link>
+            </button>
             <button
               onClick={(e) => {
                 e.preventDefault();

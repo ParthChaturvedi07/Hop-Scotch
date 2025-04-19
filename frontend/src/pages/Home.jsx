@@ -29,6 +29,7 @@ export const Home = () => {
   const [activeField, setActiveField] = useState(null);
   const [fare, setFare] = useState({});
   const [vehicleType, setVehicleType] = useState(null);
+  const [ride, setRide] = useState(null);
 
   // console.log(vehicleType);
 
@@ -43,6 +44,11 @@ export const Home = () => {
       userId: user._id,
     });
   }, [user]);
+
+  socket.on("ride-confirmed", (ride) => {
+    setWaitingForDriverPanel(true);
+    setRide(ride);
+  });
 
   const vehiclePanelRef = useRef(null);
   const panelRef = useRef(null);
@@ -186,20 +192,24 @@ export const Home = () => {
   };
 
   const createRide = async () => {
-    const response = await axios.post(
-      `${import.meta.env.VITE_BASE_URL}/rides/create`,
-      {
-        pickup,
-        destination,
-        vehicleType,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/rides/create`,
+        {
+          pickup,
+          destination,
+          vehicleType,
         },
-      }
-    );
-    console.log(response.data);
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      console.log("Ride created",response.data);
+    } catch (error) {
+      console.error("Error creating ride:", error);
+    }
   };
 
   return (
@@ -323,7 +333,10 @@ export const Home = () => {
         ref={WaitingForDriverRef}
         className="fixed w-full z-10 bottom-0 bg-white rounded-t-2xl border-t-4 border-black px-3 py-6  shadow-[0_-5px_20px_rgba(0,0,0,0.2)]"
       >
-        <WaitingForDriver setWaitingForDriverPanel={setWaitingForDriverPanel} />
+        <WaitingForDriver
+          setWaitingForDriverPanel={setWaitingForDriverPanel}
+          ride={ride}
+        />
       </div>
     </>
   );

@@ -87,3 +87,26 @@ export const createRide = async ({
 
   return ride;
 };
+
+export const confirmRide = async (rideId, driverId) => {
+  if (!rideId || !driverId) {
+    throw new Error("Ride ID and Driver ID are required");
+  }
+
+  await rideModel.findOneAndUpdate(
+    {
+      _id: rideId,
+    },
+    {
+      status: "accepted",
+      driver: driverId,
+    }
+  );
+
+  const ride = await rideModel.findOne({ _id: rideId }).populate("user").populate("driver").select("+otp");
+  if (!ride) {
+    throw new Error("Ride not found");
+  }
+
+  return ride;
+};

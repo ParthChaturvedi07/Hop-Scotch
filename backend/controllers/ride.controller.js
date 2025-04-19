@@ -78,5 +78,29 @@ export const getFare = async (req, res) => {
 };
 
 export const confirmRide = async (req, res) => {
-  
-}
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { rideId } = req.body;
+  const driverId = req.driver._id;
+
+  try {
+    const ride = await rideService.confirmRide(rideId, driverId);
+
+    sendMessageToSocketId(ride.user.socketId, {
+      event: "ride-confirmed",
+      data: ride,
+    });
+
+    return res.status(200).json({
+      message: "Ride confirmed successfully",
+      ride,
+    });
+  } catch (err) {
+    console.error("Error confirming ride:", err);
+    return res.status(500).json({ message: "Error confirming ride" });
+  }
+};
