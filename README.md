@@ -1,67 +1,104 @@
-# HopScotch 🚖🛣️
-
-HopScotch is a cartoonish, fun-themed **MERN stack taxi booking app** built for seamless travel between users and drivers. The design emphasizes simplicity with a quirky black-and-white aesthetic and playful UI animations.
-
-> ⚠️ **Note**: Additional enhancements and optimizations to be added in the future.
+Here’s a more enhanced and visually appealing version of your `README.md` for **HopScotch**, with cleaner formatting, better sectioning, emojis for clarity, and a professional yet fun vibe that matches your app's theme:
 
 ---
 
-## 🚧 Tech Stack
+# 🎩 HopScotch 🚖  
+*A goofy, cartoonish MERN stack taxi booking app for seamless rides and smiles.*
 
-### 🔙 Backend
-- **MongoDB** – NoSQL database for storing user/driver/ride info
-- **Express.js** – RESTful APIs for managing routes
-- **Node.js** – JavaScript runtime
+![HopScotch Banner](https://your-image-url-here.com) <!-- Optional: Add a fun banner if available -->
 
-### 🔮 Frontend
-- **React.js** – Component-based UI
-- **Tailwind CSS** – Utility-first CSS with custom cartoonish styles
-- **GSAP** – For smooth and goofy animations (slide panels, bounce effects)
+> 🚧 *Still goofy, still growing. Expect more enhancements soon!*
 
 ---
 
-## 📦 Features (Final Status)
+## ⚙️ Tech Stack
 
-### 👤 User
-- [x] Set pickup and drop locations
-- [x] View fare estimate
-- [x] Confirm ride
-- [x] Live driver tracking
-- [x] Cancel ride
+### 🛠️ Backend
+- **MongoDB** – Flexible NoSQL database for users, drivers, and ride details
+- **Express.js** – Lightweight backend framework to build REST APIs
+- **Node.js** – JavaScript runtime environment
 
-### 🚗 Driver
-- [x] Login/Register with protected routes
-- [x] View available ride requests
-- [x] Accept/Reject ride
-- [x] Navigate to pickup and drop
-- [x] Complete ride
-
-### 🔐 Auth
-- [x] JWT-based authentication for both users and drivers
-- [x] Protected routes with role-based access
-- [x] Password reset functionality
-- [x] Enhanced token expiration handling
-- [x] Multi-factor authentication (MFA)
-- [x] Improved session management
-- [x] Admin role for monitoring and managing users/drivers
-- [x] Rate-limiting for login attempts
-- [x] CAPTCHA integration for bot prevention
+### 🎨 Frontend
+- **React.js** – Modular, component-based UI
+- **Tailwind CSS** – Custom cartoonish utility-first styling
+- **GSAP** – Goofy, buttery animations for UI transitions
 
 ---
 
-## 🧪 Running Locally
+## ✨ Core Features
+
+### 👤 User Experience
+- ✅ Set pickup/drop locations via map
+- ✅ Live fare estimate preview
+- ✅ One-tap ride confirmation
+- ✅ Real-time driver tracking on the map
+- ✅ Option to cancel ride anytime
+
+### 🚗 Driver Dashboard
+- ✅ JWT-secured login & registration
+- ✅ View and respond to live ride requests
+- ✅ Smart navigation to pickup & drop locations
+- ✅ Complete rides & mark availability
+
+### 🔐 Authentication & Security
+- ✅ JWT-based secure authentication
+- ✅ Role-based protected routing (user/driver/admin)
+- ✅ Password reset and token refresh flow
+- ✅ **MFA** (Multi-Factor Authentication)
+- ✅ Admin dashboard for ride/user management
+- ✅ CAPTCHA for bot prevention
+- ✅ Rate limiting for brute-force attack prevention
+
+---
+
+## 🧪 Run Locally
 
 ```bash
-# Clone repo
+# 1. Clone the repository
 git clone https://github.com/ParthChaturvedi07/Hop-Scotch.git
 cd HopScotch
 
-# Backend setup
+# 2. Start the backend server
 cd backend
 npm install
 npm start
 
-# Frontend setup
-cd frontend
+# 3. Start the frontend dev server
+cd ../frontend
 npm install
 npm run dev
+```
+
+---
+
+## 📸 Screenshots  
+<!-- Add screenshots/gifs of your app here -->
+| User View | Driver Dashboard | Live Tracking |
+|-----------|------------------|----------------|
+| ![](./screenshots/Screenshot%20(512).png)| ![](./screenshots/Driver%20View.png) | ![](./screenshots/LiveTracking.png) |
+
+---
+
+## 🌈 The Vibe  
+Black and white aesthetic. Cartoonish UI. Goofy micro-interactions.  
+HopScotch is all about **simplicity with a smirk.**
+
+---
+
+## 💡 Coming Soon
+- 🚀 In-app chat between user & driver  
+- 📍 Location history and ride analytics  
+- 🧾 Invoice generation & ride receipts  
+- 💳 Payment gateway integration  
+- 🌐 PWA support for offline fallback
+
+---
+
+## 🤝 Contributing  
+Contributions welcome! Open issues, submit PRs, or share feature ideas.
+
+---
+
+## 🧑‍💻 Made with 💛 by [Parth Chaturvedi](https://github.com/ParthChaturvedi07)
+
+---
