@@ -5,7 +5,7 @@ Here’s a more enhanced and visually appealing version of your `README.md` for 
 # 🎩 HopScotch 🚖  
 *A goofy, cartoonish MERN stack taxi booking app for seamless rides and smiles.*
 
-![HopScotch Banner](https://your-image-url-here.com) 
+![HopScotch Banner](screenshots/HospScotch logo.png) 
 
 > 🚧 *Still goofy, still growing. Expect more enhancements soon!*
 
