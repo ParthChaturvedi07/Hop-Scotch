@@ -2,6 +2,8 @@ import React from "react";
 import carLogo from "../assets/images/—Pngtree—3d super car with transparent_5357818.png";
 
 export const WaitingForDriver = (props) => {
+  console.log(props.ride);
+
   return (
     <div className="space-y-5 px-4 py-3 text-black">
       {/* Close Icon */}
@@ -16,16 +18,18 @@ export const WaitingForDriver = (props) => {
 
       <div className="flex items-center justify-between bg-white px-4 py-3 border-2 border-black rounded-xl shadow-[3px_3px_0_rgba(0,0,0,1)]">
         <img className="h-20 animate-bounce-subtle" src={carLogo} alt="Car" />
-        <div className="text-right">
-          <h2 className="text-xl font-bold capitalize">
-            {props.ride?.driver?.fullName.firstName}
-          </h2>
-          <h4 className="text-md font-bold -mt-1 -mb-1">
-            {props.ride?.vehicle?.plate}
-          </h4>
-          <p className="text-sm text-gray-600">Wagon-R, Maruti Suzuki</p>
+        <div className="flex flex-col gap-2">
+          <div className="text-right">
+            <h2 className="text-xl font-bold capitalize">
+              {props.ride?.driver?.fullName.firstName}
+            </h2>
+            <h4 className="text-md font-bold -mt-1 -mb-1">
+              {props.ride?.driver?.vehicle?.plate}
+            </h4>
+            <p className="text-sm text-gray-600">Wagon-R, Maruti Suzuki</p>
+          </div>
+          <h1 className="text-lg text-right font-bold">{props.ride?.otp}</h1>
         </div>
-        <h1 className="text-lg font-semibold">{props.ride?.otp}</h1>
       </div>
 
       <div className="flex flex-col gap-3 items-center">

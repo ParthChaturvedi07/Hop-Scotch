@@ -32,6 +32,8 @@ export const Home = () => {
   const [ride, setRide] = useState(null);
 
   // console.log(vehicleType);
+  console.log(waitingForDriverPanel);
+  
 
   const { socket } = useContext(SocketContext);
   // const {user} = useContext(UserDataContext);
@@ -47,6 +49,7 @@ export const Home = () => {
 
   socket.on("ride-confirmed", (ride) => {
     setWaitingForDriverPanel(true);
+    setVehicleFound(false);
     setRide(ride);
   });
 
@@ -143,7 +146,7 @@ export const Home = () => {
   }, [confirmRidePanel]);
 
   useGSAP(() => {
-    if (vehicleFound) {
+    if ( vehicleFound) {
       gsap.to(vehicleFoundRef.current, {
         y: 0,
       });
@@ -164,7 +167,7 @@ export const Home = () => {
         y: "100% ",
       });
     }
-  }, [WaitingForDriverRef]);
+  }, [waitingForDriverPanel]);
 
   const findFare = async () => {
     if (!pickup || !destination) {
@@ -331,7 +334,7 @@ export const Home = () => {
 
       <div
         ref={WaitingForDriverRef}
-        className="fixed w-full z-10 bottom-0 bg-white rounded-t-2xl border-t-4 border-black px-3 py-6  shadow-[0_-5px_20px_rgba(0,0,0,0.2)]"
+        className="fixed w-full z-10 bottom-0 bg-white rounded-t-2xl translate-y-full border-t-4 border-black px-3 py-6  shadow-[0_-5px_20px_rgba(0,0,0,0.2)]"
       >
         <WaitingForDriver
           setWaitingForDriverPanel={setWaitingForDriverPanel}
