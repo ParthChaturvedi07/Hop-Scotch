@@ -29,7 +29,8 @@ export const createRide = async (req, res) => {
     const pickupCoordinates = await googleMapsService.getAddressCoordinates(
       pickup
     );
-    console.log("Pickup Coordinates:", pickupCoordinates);
+
+    // console.log("Pickup Coordinates:", pickupCoordinates);
 
     const driversInRadius = await googleMapsService.getDriversInTheRadius(
       pickupCoordinates.ltd,
@@ -37,11 +38,22 @@ export const createRide = async (req, res) => {
       2
     );
 
+    const matchingDrivers = driversInRadius.filter((driver) => {
+      // console.log("Driver vehicle type:", driver.vehicle?.vehicleType);
+      return (
+        driver.vehicle?.vehicleType?.toLowerCase() === vehicleType.toLowerCase()
+      );
+    });
+
+    // console.log(
+    //   `Found ${matchingDrivers.length} drivers matching vehicle type: ${vehicleType}`
+    // );
+
     ride.otp = "";
 
     const rideWithUser = await rideModel.findOne(ride._id).populate("user");
 
-    driversInRadius.map((driver) => {
+    matchingDrivers.map((driver) => {
       // console.log(driver, ride);
 
       sendMessageToSocketId(driver.socketId, {

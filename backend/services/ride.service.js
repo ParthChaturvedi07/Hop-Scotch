@@ -10,7 +10,7 @@ export const getFare = async (pickup, destination) => {
 
   const distanceTime = await mapsService.getDistanceTime(pickup, destination);
 
-  console.log(distanceTime);
+  // console.log(distanceTime);
 
   // if (
   //   !distanceTime ||

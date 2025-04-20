@@ -2,7 +2,7 @@
 
 HopScotch is a cartoonish, fun-themed **MERN stack taxi booking app** built for seamless travel between users and drivers. The design emphasizes simplicity with a quirky black-and-white aesthetic and playful UI animations.
 
-> ⚠️ **Note**: This project is currently under development. Expect rapid changes and improvements in both UI and functionality.
+> ⚠️ **Note**: Additional enhancements and optimizations to be added in the future.
 
 ---
 
@@ -18,7 +18,9 @@ HopScotch is a cartoonish, fun-themed **MERN stack taxi booking app** built for 
 - **Tailwind CSS** – Utility-first CSS with custom cartoonish styles
 - **GSAP** – For smooth and goofy animations (slide panels, bounce effects)
 
-## 📦 Features (current status)
+---
+
+## 📦 Features (Final Status)
 
 ### 👤 User
 - [x] Set pickup and drop locations
@@ -35,34 +37,15 @@ HopScotch is a cartoonish, fun-themed **MERN stack taxi booking app** built for 
 - [x] Complete ride
 
 ### 🔐 Auth
-- JWT-based authentication for both users and drivers
-- Protected routes with role-based access
-- Password reset functionality added
-- Enhanced token expiration handling
-- Multi-factor authentication (MFA) in progress
-- Improved session management
-- Admin role for monitoring and managing users/drivers
-- Rate-limiting for login attempts
-- CAPTCHA integration for bot prevention
-## 📦 Features (in progress)
-
-### 👤 User
-- [x] Set pickup and drop locations
-- [x] View fare estimate
-- [x] Confirm ride
-- [ ] Live driver tracking
-- [ ] Cancel ride
-
-### 🚗 Driver
-- [x] Login/Register with protected routes
-- [x] View available ride requests
-- [ ] Accept/Reject ride
-- [ ] Navigate to pickup and drop
-- [ ] Complete ride
-
-### 🔐 Auth
-- JWT-based authentication for both users and drivers
-- Protected routes with role-based access
+- [x] JWT-based authentication for both users and drivers
+- [x] Protected routes with role-based access
+- [x] Password reset functionality
+- [x] Enhanced token expiration handling
+- [x] Multi-factor authentication (MFA)
+- [x] Improved session management
+- [x] Admin role for monitoring and managing users/drivers
+- [x] Rate-limiting for login attempts
+- [x] CAPTCHA integration for bot prevention
 
 ---
 
@@ -82,22 +65,3 @@ npm start
 cd frontend
 npm install
 npm run dev
-```
-
----
-
-## 🎨 UI Theme
-- Monochrome black-and-white
-- Cartoon-style icons and transitions
-- Bouncy, playful interactions with subtle hover effects
-
----
-
-## 🛠️ Project Status
-> 🚧 **Actively being built** – New features and improvements are added frequently.
-
-Planned upcoming additions:
-- 🚘 Real-time ride status updates
-- 🗺️ Map integration (e.g., Mapbox or Google Maps)
-- 💬 Chat between driver and user
-- 📲 Mobile responsiveness

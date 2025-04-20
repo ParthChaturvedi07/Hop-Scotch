@@ -36,7 +36,7 @@ export function initializeSocket(server) {
         return socket.emit("error", { message: "Invalid location data" });
       }
 
-      console.log("Updating location for driver:", { userId, location });
+      // console.log("Updating location for driver:", { userId, location });
 
       try {
         const updatedDriver = await driversModel.findByIdAndUpdate(
@@ -54,7 +54,7 @@ export function initializeSocket(server) {
           return socket.emit("error", { message: "Driver not found" });
         }
 
-        console.log("Driver location updated successfully:", updatedDriver);
+        // console.log("Driver location updated successfully:", updatedDriver);
       } catch (error) {
         console.log("Error updating driver location:", error);
         socket.emit("error", { message: "Failed to update location" });
@@ -68,7 +68,7 @@ export function initializeSocket(server) {
 }
 
 export function sendMessageToSocketId(socketId, messageObject) {
-  console.log(`Sending message to ${socketId}`, messageObject);
+  // console.log(`Sending message to ${socketId}`, messageObject);
 
   if (io) {
     io.to(socketId).emit(messageObject.event, messageObject.data);
