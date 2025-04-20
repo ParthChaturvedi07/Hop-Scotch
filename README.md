@@ -1,6 +1,3 @@
-Here’s a more enhanced and visually appealing version of your `README.md` for **HopScotch**, with cleaner formatting, better sectioning, emojis for clarity, and a professional yet fun vibe that matches your app's theme:
-
----
 
 # 🎩 HopScotch 🚖  
 *A goofy, cartoonish MERN stack taxi booking app for seamless rides and smiles.*
