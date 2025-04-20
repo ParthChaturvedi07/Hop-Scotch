@@ -4,6 +4,7 @@ import expressSession from "express-session";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import connectToDb from "./db/db.js";
+import "dotenv/config.js";
 connectToDb();
 
 // Routes
@@ -29,7 +30,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: process.env.NODE_ENV === "development",
+      secure: process.env.NODE_ENV === "production",
       httpOnly: true,
     },
   })
