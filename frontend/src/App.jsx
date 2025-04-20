@@ -7,7 +7,7 @@ import { DriverLogin } from "./pages/DriverLogin";
 import { DriverSignUp } from "./pages/DriverSignUp";
 import { UserDataContext } from "./context/UserContext";
 import { Home } from "./pages/Home";
-import { UserProtectedWrapper } from "./context/userProtectedWrapper";
+import { UserProtectedWrapper } from "./context/UserProtectedWrapper";
 import { UserLogout } from "./pages/UserLogout";
 import { DriverHome } from "./pages/DriverHome";
 import { DriverProtectedWrapper } from "./context/DriverProtectedWrapper";
