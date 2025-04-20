@@ -22,6 +22,7 @@ export const DriverHome = () => {
 
   const { socket } = useContext(SocketContext);
   const driver = JSON.parse(localStorage.getItem("driver"));
+  console.log(driver);
 
   useEffect(() => {
     socket.emit("join", {
@@ -32,7 +33,6 @@ export const DriverHome = () => {
     const updateLocation = () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
-         
           // console.log({
           //   userId: driver._id,
           //   location: {

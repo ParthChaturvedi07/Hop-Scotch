@@ -262,7 +262,7 @@ export const Home = () => {
                   setActiveField("pickup");
                 }}
                 placeholder="Add a pick-up location"
-                className="w-full bg-gray-100 p-3 text-md text-center font-semibold border-2 border-black rounded-xl focus:outline-none focus:ring-1 focus:ring-black placeholder:text-sm hover:scale-105 transition-transform"
+                className="w-full bg-gray-100 py-3 px-8 text-md text-center font-semibold border-2 border-black rounded-xl focus:outline-none focus:ring-1 focus:ring-black placeholder:text-sm hover:scale-105 transition-transform"
               />
               <input
                 type="text"
@@ -273,7 +273,7 @@ export const Home = () => {
                   setActiveField("destination");
                 }}
                 placeholder="Enter your destination"
-                className="w-full bg-gray-100 p-3 text-md text-center font-semibold border-2 border-black rounded-xl focus:outline-none focus:ring-1 focus:ring-black placeholder:text-sm hover:scale-105 transition-transform"
+                className="w-full bg-gray-100 py-3 px-8 text-md text-center font-semibold border-2 border-black rounded-xl focus:outline-none focus:ring-1 focus:ring-black placeholder:text-sm hover:scale-105 transition-transform"
               />
             </form>
           </div>

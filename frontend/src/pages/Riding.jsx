@@ -3,6 +3,7 @@ import streetMap from "../assets/images/0_gwMx05pqII5hbfmX.gif";
 import carLogo from "../assets/images/—Pngtree—3d super car with transparent_5357818.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { SocketContext } from "../context/SocketContext";
+import { LiveTracking } from "../components/LiveTracking";
 
 export const Riding = () => {
   const location = useLocation();
@@ -22,8 +23,8 @@ export const Riding = () => {
       >
         <i className=" text-lg font-medium ri-home-5-line"></i>
       </Link>
-      <div className="h-1/2">
-        <img className="h-full w-full" src={streetMap} alt="" />
+      <div className="h-1/2 overflow-hidden">
+       <LiveTracking/>
       </div>
       <div className="h-1/2 p-2 border-t-4 border-black">
         <div className="flex items-center justify-between bg-white px-4 py-3 ">
