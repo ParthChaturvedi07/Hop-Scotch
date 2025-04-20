@@ -46,6 +46,7 @@ export const DriverSignUp = () => {
         `${import.meta.env.VITE_BASE_URL}/drivers/register`,
         newDriver
       );
+      console.log("Signup response:", response.data);
       if (response.status === 201) {
         const data = response.data;
         setDriver(data.driver);
