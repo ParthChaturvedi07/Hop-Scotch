@@ -5,7 +5,7 @@ Here’s a more enhanced and visually appealing version of your `README.md` for 
 # 🎩 HopScotch 🚖  
 *A goofy, cartoonish MERN stack taxi booking app for seamless rides and smiles.*
 
-![HopScotch Banner](https://your-image-url-here.com) <!-- Optional: Add a fun banner if available -->
+![HopScotch Banner](https://your-image-url-here.com) 
 
 > 🚧 *Still goofy, still growing. Expect more enhancements soon!*
 
@@ -86,11 +86,8 @@ HopScotch is all about **simplicity with a smirk.**
 ---
 
 ## 💡 Coming Soon
-- 🚀 In-app chat between user & driver  
-- 📍 Location history and ride analytics  
-- 🧾 Invoice generation & ride receipts  
+- 🚀 In-app chat between user & driver     
 - 💳 Payment gateway integration  
-- 🌐 PWA support for offline fallback
 
 ---
 
