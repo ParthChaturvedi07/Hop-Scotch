@@ -75,7 +75,7 @@ npm run dev
 <!-- Add screenshots/gifs of your app here -->
 | User View | Driver Dashboard | Live Tracking |
 |-----------|------------------|----------------|
-| ![](./screeenshots/Screenshot(512.jpg)) | ![](./screenshots/Driver%20View.png) | ![](tracking.gif) |
+| ![](./screenshots/Screenshot%20(512).png)| ![](./screenshots/Driver%20View.png) | ![](./screenshots/LiveTracking.png) |
 
 ---
 
