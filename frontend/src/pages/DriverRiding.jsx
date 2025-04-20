@@ -5,6 +5,7 @@ import Logo from "../assets/images/031bd833-fab5-4988-93d4-a2165eddbc92-removebg
 import { FinishRide } from "../components/FinishRide";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { LiveTracking } from "../components/LiveTracking";
 
 export const DriverRiding = (props) => {
   const [finishRidePanel, setFinishRidePanel] = useState(false);
@@ -42,7 +43,7 @@ export const DriverRiding = (props) => {
       </div>
 
       <div className="h-4/5">
-        <img className="h-full w-full object-cover" src={streetMap} alt="" />
+        <LiveTracking/>
       </div>
 
       <div className="relative h-1/5 p-6 flex items-center justify-between border-t-4 border-white bg-black shadow-[0px_-4px_0_rgba(0,0,0,1)]">

@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import axios from "axios";
-import streetMap from "../assets/images/0_gwMx05pqII5hbfmX.gif";
+// import streetMap from "../assets/images/0_gwMx05pqII5hbfmX.gif";
 import Logo from "../assets/images/031bd833-fab5-4988-93d4-a2165eddbc92-removebg-preview.png";
 import { Link } from "react-router-dom";
 import { DriverDetails } from "../components/DriverDetails";
@@ -9,6 +9,7 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ConfirmRidePopUp } from "../components/ConfirmRidePopUp";
 import { SocketContext } from "../context/SocketContext";
+import { LiveTracking } from "../components/LiveTracking";
 
 export const DriverHome = () => {
   const [ridePopUpPanel, setRidePopUpPanel] = useState(false);
@@ -122,8 +123,8 @@ export const DriverHome = () => {
           <i className=" text-lg font-medium ri-logout-circle-line"></i>
         </Link>
       </div>
-      <div className="h-[70%]">
-        <img className="h-full w-full object-cover" src={streetMap} alt="" />
+      <div className="h-[70%] overflow-hidden">
+        <LiveTracking className="h-full w-full object-cover" />
       </div>
       <div className=" h-[30%] p-6 border-t-4 border-black">
         <DriverDetails />

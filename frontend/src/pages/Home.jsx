@@ -12,6 +12,7 @@ import { VehiclePanel } from "../components/VehiclePanel";
 import { WaitingForDriver } from "../components/WaitingForDriver";
 import { LookingForDriver } from "../components/LookingForDriver";
 import { SocketContext } from "../context/SocketContext";
+import { LiveTracking } from "../components/LiveTracking";
 
 export const Home = () => {
   const [pickup, setPickup] = useState("");
@@ -231,11 +232,7 @@ export const Home = () => {
         />
 
         <div className="h-screen w-screen">
-          <img
-            className="h-full w-full object-cover opacity-90"
-            src={streetMap}
-            alt=""
-          />
+          <LiveTracking />
         </div>
 
         <div className=" absolute flex flex-col justify-end h-screen w-full h-screen  top-0">
