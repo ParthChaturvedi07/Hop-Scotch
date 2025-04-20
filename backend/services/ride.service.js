@@ -1,4 +1,5 @@
 import rideModel from "../models/ride.model.js";
+import { sendMessageToSocketId } from "../socket.js";
 import * as mapsService from "./googlemaps.service.js";
 import crypto from "crypto";
 
@@ -103,10 +104,86 @@ export const confirmRide = async (rideId, driverId) => {
     }
   );
 
-  const ride = await rideModel.findOne({ _id: rideId }).populate("user").populate("driver").select("+otp");
+  const ride = await rideModel
+    .findOne({ _id: rideId })
+    .populate("user")
+    .populate("driver")
+    .select("+otp");
+
   if (!ride) {
     throw new Error("Ride not found");
   }
+
+  return ride;
+};
+
+export const startRide = async (rideId, otp) => {
+  if (!rideId || !otp) {
+    throw new Error("Ride ID and OTP are required");
+  }
+
+  const ride = await rideModel
+    .findOne({
+      _id: rideId,
+    })
+    .populate("user")
+    .populate("driver")
+    .select("+otp");
+
+  if (!ride) {
+    throw new Error("Ride not found");
+  }
+
+  if (ride.status !== "accepted") {
+    throw new Error("Ride not accepted yet");
+  }
+
+  if (ride.otp !== otp) {
+    throw new Error("Invalid OTP");
+  }
+
+  await rideModel.findOneAndUpdate(
+    {
+      _id: rideId,
+    },
+    {
+      status: "ongoing",
+    }
+  );
+
+  return ride;
+};
+
+export const endRide = async (rideId, driverId) => {
+  if (!rideId || !driverId) {
+    throw new Error("Ride ID and Driver ID are required");
+  }
+
+  const ride = await rideModel
+    .findOne({
+      _id: rideId,
+      driver: driverId,
+    })
+    .populate("user")
+    .populate("driver")
+    .select("+otp");
+
+  if (!ride) {
+    throw new Error("Ride not found");
+  }
+
+  if (ride.status !== "ongoing") {
+    throw new Error("Ride not ongoing");
+  }
+
+  await rideModel.findOneAndUpdate(
+    {
+      _id: rideId,
+    },
+    {
+      status: "completed",
+    }
+  );
 
   return ride;
 };

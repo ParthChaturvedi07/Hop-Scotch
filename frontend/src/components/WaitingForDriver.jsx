@@ -54,7 +54,7 @@ export const WaitingForDriver = (props) => {
         <div className="w-full flex items-center gap-4 p-3 border-2 border-black rounded-xl bg-gray-50 shadow-[3px_3px_0_rgba(0,0,0,1)]">
           <i className="ri-money-rupee-circle-fill text-xl"></i>
           <div>
-            <h3 className="text-lg font-bold">₹{props.ride?.fare}</h3>
+            <h3 className="text-lg font-bold">₹{props.ride?.fare.toFixed(2)}</h3>
             <p className="text-sm -mt-1 text-gray-600">Total Fare</p>
           </div>
         </div>

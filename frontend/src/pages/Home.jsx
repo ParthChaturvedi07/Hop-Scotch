@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import Logo from "../assets/images/031bd833-fab5-4988-93d4-a2165eddbc92-removebg-preview.png";
 import streetMap from "../assets/images/0_gwMx05pqII5hbfmX.gif";
 import { gsap } from "gsap";
@@ -11,7 +12,6 @@ import { VehiclePanel } from "../components/VehiclePanel";
 import { WaitingForDriver } from "../components/WaitingForDriver";
 import { LookingForDriver } from "../components/LookingForDriver";
 import { SocketContext } from "../context/SocketContext";
-import { UserDataContext } from "../context/UserContext";
 
 export const Home = () => {
   const [pickup, setPickup] = useState("");
@@ -31,12 +31,18 @@ export const Home = () => {
   const [vehicleType, setVehicleType] = useState(null);
   const [ride, setRide] = useState(null);
 
+  const vehiclePanelRef = useRef(null);
+  const panelRef = useRef(null);
+  const confirmRidePanelRef = useRef(null);
+  const vehicleFoundRef = useRef(null);
+  const WaitingForDriverRef = useRef(null);
+
+  const navigate = useNavigate();
+
   // console.log(vehicleType);
-  console.log(waitingForDriverPanel);
-  
+  // console.log(waitingForDriverPanel);
 
   const { socket } = useContext(SocketContext);
-  // const {user} = useContext(UserDataContext);
   const user = JSON.parse(localStorage.getItem("user"));
   console.log(user);
 
@@ -53,11 +59,11 @@ export const Home = () => {
     setRide(ride);
   });
 
-  const vehiclePanelRef = useRef(null);
-  const panelRef = useRef(null);
-  const confirmRidePanelRef = useRef(null);
-  const vehicleFoundRef = useRef(null);
-  const WaitingForDriverRef = useRef(null);
+  socket.on("ride-started", (ride) => {
+    console.log(ride);
+    setWaitingForDriverPanel(false);
+    navigate("/riding", { state: { ride } });
+  });
 
   const handlePickupChange = async (e) => {
     e.preventDefault();
@@ -146,7 +152,7 @@ export const Home = () => {
   }, [confirmRidePanel]);
 
   useGSAP(() => {
-    if ( vehicleFound) {
+    if (vehicleFound) {
       gsap.to(vehicleFoundRef.current, {
         y: 0,
       });
@@ -209,7 +215,7 @@ export const Home = () => {
           },
         }
       );
-      console.log("Ride created",response.data);
+      console.log("Ride created", response.data);
     } catch (error) {
       console.error("Error creating ride:", error);
     }

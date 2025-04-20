@@ -1,13 +1,45 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
+import axios from "axios";
 export const ConfirmRidePopUp = (props) => {
+  const navigate = useNavigate();
+
   const [otp, setOtp] = useState("");
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/rides/start-ride`,
+        {
+          params: {
+            rideId: props.ride._id,
+            otp: otp,
+          },
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
 
-
+      if (response.status === 200) {
+        props.setConfirmRidePopUpPanel(false);
+        props.setRidePopUpPanel(false);
+        navigate("/driver-riding", { state: { ride: props.ride } });
+      }
+    } catch (error) {
+      if (
+        error?.response?.data?.message?.toLowerCase().includes("invalid otp")
+      ) {
+        toast.error("Invalid OTP! Please try again.");
+      } else {
+        toast.error("Something went wrong. Try again.");
+      }
+      console.error("Error starting ride:", error);
+    }
   };
 
   return (
@@ -83,9 +115,7 @@ export const ConfirmRidePopUp = (props) => {
           </div>
         </div>
         <form
-          onSubmit={(e) => {
-            submitHandler(e);
-          }}
+          onSubmit={submitHandler}
           action=""
           className="w-full flex flex-col items-center gap-2 mt-3"
         >
@@ -97,15 +127,11 @@ export const ConfirmRidePopUp = (props) => {
             className="w-full bg-gray-100 p-3 text-md text-center font-semibold border-2 border-black rounded-xl focus:outline-none focus:ring-1 focus:ring-black placeholder:text-sm transition-transform"
           />
           <div className="flex items-center justify-between gap-4 w-full">
-            <button
-              onClick={() => {}}
-              className="text-center w-full bg-green-500 border-2 border-black text-white font-semibold p-3 rounded-xl shadow-[3px_3px_0_rgba(0,0,0,1)] hover:scale-105 transition-transform"
-            >
+            <button className="text-center w-full bg-green-500 border-2 border-black text-white font-semibold p-3 rounded-xl shadow-[3px_3px_0_rgba(0,0,0,1)] hover:scale-105 transition-transform">
               Confirm
             </button>
             <button
-              onClick={(e) => {
-                e.preventDefault();
+              onClick={() => {
                 props.setConfirmRidePopUpPanel(false);
                 props.setRidePopUpPanel(false);
               }}

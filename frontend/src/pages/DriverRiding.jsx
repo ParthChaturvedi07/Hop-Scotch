@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import streetMap from "../assets/images/0_gwMx05pqII5hbfmX.gif";
 import Logo from "../assets/images/031bd833-fab5-4988-93d4-a2165eddbc92-removebg-preview.png";
 import { FinishRide } from "../components/FinishRide";
@@ -10,6 +10,12 @@ export const DriverRiding = (props) => {
   const [finishRidePanel, setFinishRidePanel] = useState(false);
 
   const finishRidePanelRef = useRef(null);
+
+  const location = useLocation();
+  const rideData = location.state?.ride || null;
+
+  console.log(rideData);
+  
 
   useGSAP(() => {
     if (finishRidePanel) {
@@ -65,7 +71,10 @@ export const DriverRiding = (props) => {
         ref={finishRidePanelRef}
         className="fixed w-full z-10 bottom-0 bg-white translate-y-full rounded-t-2xl border-black border-t-4 shadow-[0_-5px_20px_rgba(0,0,0,0.2)]"
       >
-        <FinishRide setFinishRidePanel={setFinishRidePanel} />
+        <FinishRide
+          ride={rideData}
+          setFinishRidePanel={setFinishRidePanel}
+        />
       </div>
     </div>
   );

@@ -14,6 +14,8 @@ import { DriverProtectedWrapper } from "./context/DriverProtectedWrapper";
 import { DriverLogout } from "./pages/DriverLogout";
 import { Riding } from "./pages/Riding";
 import { DriverRiding } from "./pages/DriverRiding";
+import { ToastContainer } from "react-toastify";
+
 export function App() {
   const ans = useContext(UserDataContext);
 
@@ -75,6 +77,7 @@ export function App() {
           }
         />
       </Routes>
+      <ToastContainer position="top-center" autoClose={3000} />
     </div>
   );
 }

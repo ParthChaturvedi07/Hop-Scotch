@@ -31,6 +31,7 @@ export const DriverHome = () => {
     const updateLocation = () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
+         
           // console.log({
           //   userId: driver._id,
           //   location: {
